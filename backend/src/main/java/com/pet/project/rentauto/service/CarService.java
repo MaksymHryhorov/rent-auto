@@ -25,14 +25,7 @@ public class CarService {
 
     public CarDto editCar(final CarDto carDto) {
         Car car = getCarById(carDto.getId());
-        car.setBrand(carDto.getBrand());
-        car.setModel(carDto.getModel());
-        car.setPrice(carDto.getPrice());
-        car.setRent(carDto.getRent());
-        car.setReservedCars(carDto.getReservedCars());
-        car.setCarType(carDto.getCarType());
-        car.setCarAvailable(carDto.getCarAvailable());
-
+        setCarPropertiesFromDto(car, carDto);
         carRepository.save(car);
         return carDto;
     }
@@ -48,5 +41,15 @@ public class CarService {
     private Car getCarById(final String carId) {
         return carRepository.findById(carId)
                 .orElseThrow(() -> new IllegalArgumentException("Cannot find car with id" + carId));
+    }
+
+    private void setCarPropertiesFromDto(Car car, CarDto carDto) {
+        car.setBrand(carDto.getBrand());
+        car.setModel(carDto.getModel());
+        car.setPrice(carDto.getPrice());
+        car.setRent(carDto.getRent());
+        car.setReservedCars(carDto.getReservedCars());
+        car.setCarType(carDto.getCarType());
+        car.setCarAvailable(carDto.getCarAvailable());
     }
 }

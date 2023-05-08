@@ -2,8 +2,6 @@ package com.pet.project.rentauto.controller;
 
 import com.pet.project.rentauto.dto.CarDto;
 import com.pet.project.rentauto.dto.UploadCarResponse;
-import com.pet.project.rentauto.model.Car;
-import com.pet.project.rentauto.repository.CarRepository;
 import com.pet.project.rentauto.service.CarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,7 +15,7 @@ public class CarController {
 
     private final CarService carService;
 
-    @PostMapping()
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UploadCarResponse uploadCar(@RequestParam("file") MultipartFile file) {
         return carService.uploadCar(file);
@@ -26,8 +24,7 @@ public class CarController {
     @PostMapping("/video")
     @ResponseStatus(HttpStatus.CREATED)
     public String uploadVideoCar(@RequestParam("file") MultipartFile file,
-                          @RequestParam("carId") String carId) {
-
+                                 @RequestParam("carId") String carId) {
         return carService.uploadVideoCar(file, carId);
     }
 
@@ -37,9 +34,8 @@ public class CarController {
         return carService.editCar(carDto);
     }
 
-    @GetMapping()
+    @GetMapping
     public String getHello() {
         return "HELLO";
     }
-
 }
